@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Sentiments</title>
+    <style>
+        .bullish {
+            color: green;
+        }
+        .bearish {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% for stock in stock_sentiments %}
+        <div>
+            <h3>{{ stock.stock_name }}</h3>
+            {% for title in stock.titles %}
+                <p>{{ title }}</p>
+            {% endfor %}
+            {% if stock.sentiment == 'Bullish' %}
+                <p class="bullish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+            {% elif stock.sentiment == 'Bearish' %}
+                <p class="bearish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+            {% else %}
+                <p><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
