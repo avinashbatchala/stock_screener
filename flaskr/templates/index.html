@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Sentiments</title>
     <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: fit-content; /* Adjust the width as needed */
+            height: fit-content; /* Adjust the height as needed */
+            margin-bottom: 20px;
+        }
         .bullish {
             color: green;
         }
@@ -14,20 +27,24 @@
     </style>
 </head>
 <body>
-    {% for stock in stock_sentiments %}
-        <div>
-            <h3>{{ stock.stock_name }}</h3>
-            {% for title in stock.titles %}
-                <p>{{ title }}</p>
-            {% endfor %}
-            {% if stock.sentiment == 'Bullish' %}
-                <p class="bullish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
-            {% elif stock.sentiment == 'Bearish' %}
-                <p class="bearish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
-            {% else %}
-                <p><strong>Sentiment: {{ stock.sentiment }}</strong></p>
-            {% endif %}
-        </div>
-    {% endfor %}
+    <div class="container">
+        {% for stock in stock_sentiments %}
+            <div class="box">
+                <h3>{{ stock.stock_name }}</h3>
+                {% for title in stock.titles %}
+                    <div class="box">
+                        <p>{{ title }}</p>
+                    </div>
+                {% endfor %}
+                {% if stock.sentiment == 'Bullish' %}
+                    <p class="bullish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+                {% elif stock.sentiment == 'Bearish' %}
+                    <p class="bearish"><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+                {% else %}
+                    <p><strong>Sentiment: {{ stock.sentiment }}</strong></p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
